@@ -8,7 +8,7 @@ Install shell_gpt
 
 ```pip install shell-gpt```
 
-Please update the configuration by adding your OpenAI API key to the ```~/.config/shell_gpt/.sgptrc``` file.
+If you have GPT-4, you can update the configuration by adding your OpenAI API key to the ```~/.config/shell_gpt/.sgptrc``` file.
 
 ```
 [...]
