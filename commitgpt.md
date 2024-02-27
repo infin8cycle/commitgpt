@@ -3,7 +3,7 @@ The purpose of this document is to provide you with a tool for automatically gen
 As Git changes are executed on your local computer, please run the following commands within your local environment.
 
 
-## Preparation
+## **Preparation**
 Install shell_gpt
 
 ```pip install shell-gpt```
@@ -17,17 +17,17 @@ OPENAI_API_KEY=your-api-key
 [...]
 ```
 
-## Role
+## **Role**
 Introduce a new role called ```commitgpt``` which will serve as the ChatGPT prompt.
 ```
-$ sgpt --create-role commitgpt
-Enter role description: Compose a concise Git commit header with a maximum of 50 characters, don't add double quotes,
+**$ sgpt --create-role commitgpt**
+**Enter role description:** Compose a concise Git commit header with a maximum of 50 characters, don't add double quotes,
 summarizing the changes made. If necessary and relevant, provide additional details in bullet points below the header.
 Ensure that the additional details are wrapped at 72 characters per line, following Git commit best practices.
 Your input will always be a git diff representing the changes. Focus on maintaining clear communication and a clean
 code history for any project you're involved in.
 
-Enter expecting result, e.g. answer, code, shell command, command description, etc.: answer
+**Enter expecting result, e.g. answer, code, shell command, command description, etc.:** answer
 ```
 
 
