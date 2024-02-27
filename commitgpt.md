@@ -3,10 +3,12 @@ The purpose of this document is to provide you with a tool for automatically gen
 As Git changes are executed on your local computer, please run the following commands within your local environment.
 
 
-Preparation
+## Preparation
 Install shell_gpt
+
 ```pip install shell-gpt```
-Please update the configuration by adding your OpenAI API key to the ~/.config/shell_gpt/.sgptrc file.
+
+Please update the configuration by adding your OpenAI API key to the ```~/.config/shell_gpt/.sgptrc``` file.
 
 [...]
 DEFAULT_MODEL=gpt-4
