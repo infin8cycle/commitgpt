@@ -21,8 +21,13 @@ OPENAI_API_KEY=your-api-key
 Introduce a new role called ```commitgpt``` which will serve as the ChatGPT prompt.
 ```
 $ sgpt --create-role commitgpt
-Enter role description: Compose a concise Git commit header with a maximum of 50 characters, don't add double quotes, summarizing the changes made. If necessary and relevant, provide additional details in bullet points below the header. Ensure that the additional details are wrapped at 72 characters per line, following Git commit best practices. Your input will always be a git diff representing the changes. Focus on maintaining clear communication and a clean code history for any project you're involved in.
-Enter expecting result, e.g. answer, code,             shell command, command description, etc.: answer
+Enter role description: Compose a concise Git commit header with a maximum of 50 characters, don't add double quotes,
+summarizing the changes made. If necessary and relevant, provide additional details in bullet points below the header.
+Ensure that the additional details are wrapped at 72 characters per line, following Git commit best practices.
+Your input will always be a git diff representing the changes. Focus on maintaining clear communication and a clean
+code history for any project you're involved in.
+
+Enter expecting result, e.g. answer, code, shell command, command description, etc.: answer
 ```
 
 
@@ -44,12 +49,19 @@ git diff | sgpt --role commitgpt
 ```
 
 ## Advanced Power Usage
-Enhance your experience as a power user by setting up aliases in your shell environment (e.g., .zshenv) and directing the output to the clipboard on macOS.
+Enhance your experience as a power user by setting up aliases in your shell environment (e.g., .zshenv) and directing the output to the clipboard.
 
+### MacOS
 ```
  alias commitgpt="git diff HEAD | sgpt --role commitgpt | pbcopy"
  alias commitgpt-staged="git diff --cached | sgpt --role commitgpt | pbcopy"
  alias commitgpt-unstaged="git diff | sgpt --role commitgpt | pbcopy"
+```
+### Linux
+```
+ alias commitgpt="git diff HEAD | sgpt --role commitgpt | xclip"
+ alias commitgpt-staged="git diff --cached | sgpt --role commitgpt | xclip"
+ alias commitgpt-unstaged="git diff | sgpt --role commitgpt | xclip"
 ```
 
 ## Examples (all changes are dummies)
@@ -58,23 +70,21 @@ Enhance your experience as a power user by setting up aliases in your shell envi
 
 diff
 ```
-diff --git a/helmfiles/eks-cluster/Makefile b/helmfiles/eks-cluster/Makefile
+diff --git a/cluster/Makefile b/cluster/Makefile
 index 3011b713..f88e188d 100644
---- a/helmfiles/eks-cluster/Makefile
-+++ b/helmfiles/eks-cluster/Makefile
+--- a/cluster/Makefile
++++ b/cluster/Makefile
 @@ -7,7 +7,7 @@ else
- export KLICKTIPP_ENVIRONMENT
+ export ENVIRONMENT
  endif
 
--AWS_REGION ?= eu-west-1
-+AWS_REGION ?= eu-central-1
+-AWS_REGION ?= us-east-1
++AWS_REGION ?= us-west-1
 
- KLICKTIPP_KUBE_CONTEXT ?= kt-${KLICKTIPP_ENVIRONMENT}
-
-diff --git a/helmfiles/eks-cluster/helmfile.yaml b/helmfiles/eks-cluster/helmfile.yaml
+diff --git a/cluster/helmfile.yaml b/cluster/helmfile.yaml
 index 873e8c47..dbe145e8 100644
---- a/helmfiles/eks-cluster/helmfile.yaml
-+++ b/helmfiles/eks-cluster/helmfile.yaml
+--- a/cluster/helmfile.yaml
++++ b/cluster/helmfile.yaml
 @@ -13,7 +13,7 @@ environments:
      values:
        - autoscaler_ok_total_unready_count: 3
@@ -99,10 +109,10 @@ Update AWS region and disable Datadog in helmfile
 
 diff
 ```
-diff --git a/helmfiles/eks-cluster/releases/loki/rules/pmta.yaml b/helmfiles/eks-cluster/releases/loki/rules/pmta.yaml
+diff --git a/cluster/releases/loki.yaml b/cluster/releases/loki.yaml
 index 1da9c3ad..863eaddc 100644
---- a/helmfiles/eks-cluster/releases/loki/rules/pmta.yaml
-+++ b/helmfiles/eks-cluster/releases/loki/rules/pmta.yaml
+--- a/cluster/releases/loki.yaml
++++ b/cluster/releases/loki.yaml
 @@ -44,7 +44,7 @@ groups:
        - alert: Yahoo deferral occured
          expr: |
@@ -119,7 +129,7 @@ index 1da9c3ad..863eaddc 100644
 ❯ git diff head | sgpt --role commitgpt
 Updated recordtype in Yahoo deferral alert rule
 
-- Changed the recordtype from "t" to "d" in the expression for the Yahoo deferral alert rule in the Loki rules for the PMTA logs. This change ensures that the alert rule correctly identifies and counts deferral events.
+- Changed the recordtype from "t" to "d" in the expression for the Yahoo deferral alert rule in the Loki rules for logs. This change ensures that the alert rule correctly identifies and counts deferral events.
 ```
 
 ### Example 3
